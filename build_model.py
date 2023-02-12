@@ -7,10 +7,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 
-
-
-TARGET = 'fc' #'orp'
-
+TARGET = sys.argv[1] if len(sys.argv) == 2 else 'fc'
 
 print(tf.__version__)
 np.set_printoptions(precision=3, suppress=True)
@@ -34,7 +31,6 @@ for column in df:
     vals= df[column].to_numpy()
     c = float(column)
     for i, v in enumerate(vals):
-        #print(v, c, labels[i])
         vs.append((v, c, labels[i]))
 dataset = pd.DataFrame(vs, columns= ('orp', 'ph', 'fc'))
 
@@ -50,31 +46,22 @@ test_labels = test_features.pop(TARGET)
 print(train_dataset.describe().transpose()[['mean', 'std']])
 #sns.pairplot(train_dataset, diag_kind='kde')
 
-normalizer = tf.keras.layers.Normalization(axis=-1, input_shape=[2, ])
-normalizer.adapt(np.array(train_features))
-onorm = tf.keras.layers.Normalization(axis=-1)
+inorm = tf.keras.layers.Normalization(axis=-1, input_shape=[2, ])
+inorm.adapt(np.array(train_features))
+onorm = tf.keras.layers.Normalization(axis=-1, invert=True)
 onorm.adapt(train_labels)
-#denorm = tf.keras.layers.Normalization(axis=-1, invert=True)
-#denorm.adapt(train_labels)
 
-train_labels = onorm(train_labels).numpy()[0]
-test_labels = onorm(test_labels).numpy()[0]
-
-
-
-opt = tf.keras.optimizers.Adam()
-opt.weights = None
-def build_and_compile_model(norm, onorm):
+def build_and_compile_model(inorm, onorm):
   model = keras.Sequential([
-      norm,
+      inorm,
       layers.Dense(10, activation='relu'),
       layers.Dense(10, activation='relu'),
       layers.Dense(1), 
-     # onorm,
+      onorm,
   ])
-  model.compile(loss='mean_squared_error', optimizer=opt)
+  model.compile(loss='mean_squared_error', optimizer='adam')
   return model
-model = build_and_compile_model(normalizer, onorm)
+model = build_and_compile_model(inorm, onorm)
 model.summary()
 history = model.fit(
     train_features,
@@ -91,17 +78,9 @@ sns.scatterplot(x=test_labels, y=y.to_numpy(), alpha=0.7)
 plt.grid()
 plt.show()
 
-
-from tensorflow.python.keras.saving import hdf5_format
-import h5py
-
-
-# Save model
-def save(model_path, model, omean, ovar):
-    with h5py.File(model_path, mode='w') as f:
-        hdf5_format.save_model_to_hdf5(model, f)
-        f.attrs['omean'] = omean
-        f.attrs['ovar'] = ovar
-
-
-save(f'model_{TARGET}.h5', model, onorm.mean, onorm.variance)
+model.save(f'model_{TARGET}.h5')
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+tflite_model = converter.convert()
+with open(f'model_{TARGET}.tflite', "wb") as f:
+  f.write(tflite_model)
+print('done')
