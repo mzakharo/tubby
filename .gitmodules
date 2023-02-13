@@ -1,0 +1,6 @@
+[submodule "micropython"]
+	path = micropython
+	url = git@github.com:mzakharo/micropython.git
+[submodule "tflite-micro-esp-examples"]
+	path = tflite-micro-esp-examples
+	url = https://github.com/espressif/tflite-micro-esp-examples.git
