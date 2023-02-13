@@ -1,10 +1,10 @@
 #include "tensorflow/lite/micro/all_ops_resolver.h"
 #include "tensorflow/lite/micro/micro_interpreter.h"
 #include "tensorflow/lite/schema/schema_generated.h"
-#include "model_fc.h"
+#include "src/model_fc.h"
 #include <stdio.h>
 
-const int tensor_arena_size = 2500;
+const int tensor_arena_size = 3200;
 uint8_t tensor_arena[tensor_arena_size];
 
 int main() {

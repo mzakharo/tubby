@@ -9,20 +9,13 @@ extern "C" {
 #include <tfmicromodule.h>
 
 const int tensor_arena_size = 3200;
-uint8_t * tensor_arena = NULL;
+uint8_t tensor_arena[tensor_arena_size];
 
 //Function that converts ORP & PH to Free Chlorine (FC)
 mp_obj_t fc(mp_obj_t a_obj, mp_obj_t b_obj) {
 
   const auto a = mp_obj_get_float(a_obj);
   const auto b = mp_obj_get_float(b_obj);
-
-  if (tensor_arena == NULL) {
-     tensor_arena = (uint8_t *)malloc(tensor_arena_size);
-  }
-  if (tensor_arena == NULL) {
-    return mp_const_none;
-  }
 
   const tflite::Model* model = tflite::GetModel(model_fc_tflite);
   if (model->version() != TFLITE_SCHEMA_VERSION) {
