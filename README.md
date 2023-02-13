@@ -6,3 +6,4 @@ Hot Tub Sensor and Automation.
 - Deep & Light sleep for extended battery life
 - MQTT with Home Assistant Auto Discovery
 - Remote Logging and OTA over MQTT
+- Free Chlorine/Bromine estimator model from PH and ORP values
