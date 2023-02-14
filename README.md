@@ -2,12 +2,28 @@
 Hot Tub Sensor and Automation. 
 
 - Battery powered ORP, PH sensor for Hot Tub or Pool sensing applications.
-- Hardware: UM Feather S2,  Atlas Scientific Analog PH and ORP probes
 - Deep & Light sleep for extended battery life
 - MQTT with Home Assistant Auto Discovery
 - Remote Logging and OTA over MQTT
-- PH ATC (Atomatic Temperature Compensation)
+- PH ATC (Automatic Temperature Compensation) integrating with [Balboa](https://github.com/mzakharo/pybalboa) temperature sensor
 - Free Chlorine/Bromine estimator model from PH and ORP values
+
+# Photos
+
+- The unit: https://photos.app.goo.gl/cud7ST96oGnMVKvp7
+- Grafana view: https://photos.app.goo.gl/5XL6RLwuQzMN658Q7
+
+# Hardware
+  
+ - Ultimate-Maker FeatherS2 ESP32 board (has an extra regulator that shuts off power to the Analog sensors). 
+ - 3500 mA battery
+ - Atlas Scientific Analog Kits
+ - Enclosure: https://www.adafruit.com/product/3931
+
+ 
+# Firmware
+
+- https://github.com/mzakharo/micropython/blob/tubby/ports/esp32/README.me.md
 
 
 # FC (Free Chlorine) ppm Model
