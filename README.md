@@ -15,7 +15,7 @@ Hot Tub Sensor and Automation.
 
 # Hardware
   
- - Ultimate-Maker FeatherS2 ESP32 board (has extra regulator that shuts off power to the ORP sensor board during sleep). 
+ - Ultimate-Maker FeatherS2 ESP32 board (has an extra regulator that shuts off power to the Analog sensors). 
  - 3500 mA battery
  - Atlas Scientific Analog Kits
  - Enclosure: https://www.adafruit.com/product/3931
