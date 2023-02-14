@@ -9,6 +9,10 @@ Hot Tub Sensor and Automation.
 - PH ATC (Atomatic Temperature Compensation)
 - Free Chlorine/Bromine estimator model from PH and ORP values
 
+# Building Firmware
+
+- https://github.com/mzakharo/micropython/blob/tubby/ports/esp32/README.me.md
+
 
 # FC (Free Chlorine) ppm Model
 
