@@ -5,7 +5,7 @@ Hot Tub Sensor and Automation.
 - Deep & Light sleep for extended battery life
 - MQTT with Home Assistant Auto Discovery
 - Remote Logging and OTA over MQTT
-- PH ATC (Automatic Temperature Compensation)
+- PH ATC (Automatic Temperature Compensation) integrating with [Balboa](https://github.com/mzakharo/pybalboa) temperature sensor
 - Free Chlorine/Bromine estimator model from PH and ORP values
 
 # Photos
