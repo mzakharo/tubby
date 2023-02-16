@@ -23,6 +23,7 @@
 # Firmware
 
 - https://github.com/mzakharo/micropython/blob/tubby/ports/esp32/README.me.md
+- https://github.com/mzakharo/micropython/blob/tubby/ports/esp32/modules/app.py
 
 
 # FC (Free Chlorine) ppm Model
