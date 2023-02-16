@@ -1,10 +1,10 @@
 # Hot Tub Sensor and Automation
 
-- Battery powered ORP, PH sensor for Hot Tub/SPA or Pool sensing applications.
+- Battery powered ORP, pH sensor for Hot Tub/SPA or Pool sensing applications.
 - Deep & Light sleep for ~ 1 year battery life @ 2 samples per hour
 - MQTT with Home Assistant Auto Discovery
 - Remote Logging and OTA over MQTT
-- PH ATC (Automatic Temperature Compensation) integrating with [Balboa](https://github.com/mzakharo/pybalboa) temperature sensor
+- pH ATC (Automatic Temperature Compensation) integrating with [Balboa](https://github.com/mzakharo/pybalboa) temperature sensor
 - Free Chlorine/Bromine estimator model from PH and ORP values
 
 ## Photos
@@ -15,7 +15,7 @@
   
  - [UM FeatherS2](https://unexpectedmaker.com/shop/feathers2-esp32-s2) ESP32 board 
  - 3500 mA battery
- - Atlas Scientific Gravity Analog [ORP](https://atlas-scientific.com/kits/gravity-analog-orp-kit/) and [PH](https://atlas-scientific.com/kits/gravity-analog-ph-kit/) Kits
+ - Atlas Scientific Gravity Analog [ORP](https://atlas-scientific.com/kits/gravity-analog-orp-kit/) and [pH](https://atlas-scientific.com/kits/gravity-analog-ph-kit/) Kits
  - Enclosure: https://www.adafruit.com/product/3931
  - 2 resistors for battery sensing
 
@@ -28,7 +28,7 @@
 
 ## FC (Free Chlorine) ppm Model
 
-Predict Free Chlorine & Bromine ppm from PH and ORP sensors. 
+Predict Free Chlorine & Bromine ppm from pH and ORP sensors. 
 
 - Data source:  https://jenfitch.com/free-chlorine-orpmv-vs-ph-new/
 
@@ -36,7 +36,7 @@ Predict Free Chlorine & Bromine ppm from PH and ORP sensors.
 Build the model: [build_model.py](https://github.com/mzakharo/tubby/blob/main/build_model.py).
 
 Prebuilt models:
-- [model_fc.h5](https://github.com/mzakharo/tubby/blob/main/model_fc.h5): model for predicting FC from  ORP/PH
+- [model_fc.h5](https://github.com/mzakharo/tubby/blob/main/model_fc.h5): model for predicting FC from  ORP/pH
 
 - [model_orp.h5](https://github.com/mzakharo/tubby/blob/main/model_orp.h5): model for predicting ORP from FC/PH. This one can be used to calibrate your ORP sensor by getting your water lab tested
 
