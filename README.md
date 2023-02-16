@@ -7,11 +7,11 @@
 - PH ATC (Automatic Temperature Compensation) integrating with [Balboa](https://github.com/mzakharo/pybalboa) temperature sensor
 - Free Chlorine/Bromine estimator model from PH and ORP values
 
-# Photos
+## Photos
 
 <img src="https://github.com/mzakharo/tubby/blob/main/pictures/final.jpg" width="250" height="400">  <img src="https://github.com/mzakharo/tubby/blob/main/pictures/probes.jpg" width="250" height="400">  <img src="https://github.com/mzakharo/tubby/blob/main/pictures/cal.jpg" width="250" height="400">
 
-# Hardware
+## Hardware
   
  - [UM FeatherS2](https://unexpectedmaker.com/shop/feathers2-esp32-s2) ESP32 board 
  - 3500 mA battery
@@ -20,13 +20,13 @@
  - 2 resistors for battery sensing
 
  
-# Firmware
+## Firmware
 
 - https://github.com/mzakharo/micropython/blob/tubby/ports/esp32/README.me.md
 - https://github.com/mzakharo/micropython/blob/tubby/ports/esp32/modules/app.py
 
 
-# FC (Free Chlorine) ppm Model
+## FC (Free Chlorine) ppm Model
 
 Predict Free Chlorine & Bromine ppm from PH and ORP sensors. 
 
