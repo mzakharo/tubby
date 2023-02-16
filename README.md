@@ -1,5 +1,4 @@
-# tubby
-Hot Tub Sensor and Automation. 
+# Hot Tub Sensor and Automation. 
 
 - Battery powered ORP, PH sensor for Hot Tub/SPA or Pool sensing applications.
 - Deep & Light sleep for ~ 1 year battery life @ 2 samples per hour
