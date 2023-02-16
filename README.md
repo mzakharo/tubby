@@ -1,8 +1,7 @@
-# tubby
-Hot Tub Sensor and Automation. 
+# Hot Tub Sensor and Automation. 
 
-- Battery powered ORP, PH sensor for Hot Tub or Pool sensing applications.
-- Deep & Light sleep for extended battery life
+- Battery powered ORP, PH sensor for Hot Tub/SPA or Pool sensing applications.
+- Deep & Light sleep for ~ 1 year battery life @ 2 samples per hour
 - MQTT with Home Assistant Auto Discovery
 - Remote Logging and OTA over MQTT
 - PH ATC (Automatic Temperature Compensation) integrating with [Balboa](https://github.com/mzakharo/pybalboa) temperature sensor
@@ -10,15 +9,15 @@ Hot Tub Sensor and Automation.
 
 # Photos
 
-- The unit: https://photos.app.goo.gl/cud7ST96oGnMVKvp7
-- Grafana view: https://photos.app.goo.gl/5XL6RLwuQzMN658Q7
+<img src="https://github.com/mzakharo/tubby/blob/main/pictures/final.jpg" width="250" height="400">  <img src="https://github.com/mzakharo/tubby/blob/main/pictures/probes.jpg" width="250" height="400">  <img src="https://github.com/mzakharo/tubby/blob/main/pictures/cal.jpg" width="250" height="400">
 
 # Hardware
   
- - Ultimate-Maker FeatherS2 ESP32 board (has an extra regulator that shuts off power to the Analog sensors). 
+ - [UM FeatherS2](https://unexpectedmaker.com/shop/feathers2-esp32-s2) ESP32 board 
  - 3500 mA battery
- - Atlas Scientific Analog Kits
+ - Atlas Scientific Gravity Analog [ORP](https://atlas-scientific.com/kits/gravity-analog-orp-kit/) and [PH](https://atlas-scientific.com/kits/gravity-analog-ph-kit/) Kits
  - Enclosure: https://www.adafruit.com/product/3931
+ - 2 resistors for battery sensing
 
  
 # Firmware
