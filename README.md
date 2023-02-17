@@ -2,7 +2,7 @@
 
 - Battery powered ORP, pH sensor for Hot Tub/SPA
 - ~ 1 year battery life @ 2 samples per hour
-- Sensor externally mounted, probes placed under the skimmer
+- Sensor externally mounted, probes placed under the skimmer cover
 - [Home Assistant](https://www.home-assistant.io/) Integration
 - pH ATC (Automatic Temperature Compensation) integrating with [Balboa](https://github.com/mzakharo/pybalboa) temperature sensor
 - Free Chlorine/Bromine estimate model from PH and ORP values
