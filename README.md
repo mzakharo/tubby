@@ -23,6 +23,7 @@
 ## Firmware
 
 - micropython. OTA & Logging over MQTT
+- deep & light sleep
 - [Build instructions](https://github.com/mzakharo/micropython/blob/tubby/ports/esp32/README.me.md)
 - [Code](https://github.com/mzakharo/micropython/blob/tubby/ports/esp32/modules/app.py)
 
