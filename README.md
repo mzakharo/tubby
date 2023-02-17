@@ -22,6 +22,7 @@
  
 ## Firmware
 
+- micropython. OTA & Logging over MQTT
 - [Build instructions](https://github.com/mzakharo/micropython/blob/tubby/ports/esp32/README.me.md)
 - [Code](https://github.com/mzakharo/micropython/blob/tubby/ports/esp32/modules/app.py)
 
