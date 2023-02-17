@@ -1,13 +1,12 @@
 # Hot Tub Water Quality Sensor
 
-- Battery powered ORP, pH sensor for Hot Tub/SPA or Pool sensing applications.
-- Deep & Light sleep for ~ 1 year battery life @ 2 samples per hour
-- MQTT with Home Assistant Auto Discovery
-- Remote Logging and OTA over MQTT
+- Battery powered ORP, pH sensor for Hot Tub/SPA
+- ~ 1 year battery life @ 2 samples per hour
+- Sensor externally mounted, probes placed under the skimmer
+- [Home Assistant](https://www.home-assistant.io/) Integration
 - pH ATC (Automatic Temperature Compensation) integrating with [Balboa](https://github.com/mzakharo/pybalboa) temperature sensor
-- Free Chlorine/Bromine estimator model from PH and ORP values
+- Free Chlorine/Bromine estimate model from PH and ORP values
 
-## Photos
 ![image](https://user-images.githubusercontent.com/567867/219641155-691258fb-7b6d-4ead-90d6-9f79a9f34092.png)
 
 <img src="https://github.com/mzakharo/tubby/blob/main/pictures/final.jpg" width="250" height="400">  <img src="https://github.com/mzakharo/tubby/blob/main/pictures/probes.jpg" width="250" height="400">  <img src="https://github.com/mzakharo/tubby/blob/main/pictures/cal.jpg" width="250" height="400">
