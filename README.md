@@ -18,7 +18,9 @@
  - Atlas Scientific Gravity Analog [ORP](https://atlas-scientific.com/kits/gravity-analog-orp-kit/) and [pH](https://atlas-scientific.com/kits/gravity-analog-ph-kit/) Kits
  - Enclosure: [DS-AT-0811-S](https://www.adafruit.com/product/3931)
  - [2x100 kΩ resistors](https://www.adafruit.com/product/2787) for battery monitoring (optional)
-
+ 
+ ## Wiring
+  - [Diagram](https://raw.githubusercontent.com/mzakharo/tubby/main/pictures/tubby_wiring.png)
  
 ## Firmware
 
