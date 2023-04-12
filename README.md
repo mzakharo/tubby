@@ -37,19 +37,14 @@ Predict Free Chlorine & Bromine ppm from pH and ORP sensors.
 - Data source:  https://jenfitch.com/free-chlorine-orpmv-vs-ph-new/
 
 
-Build the model: [build_model.py](https://github.com/mzakharo/tubby/blob/main/build_model.py).
+Build the model: [fc_model.ipynb](https://github.com/mzakharo/tubby/blob/main/fc_model.ipynb).
 
-Prebuilt models:
+Prebuilt model:
 - [model_fc.h5](https://github.com/mzakharo/tubby/blob/main/model_fc.h5): model for predicting FC from  ORP/pH
 
-- [model_orp.h5](https://github.com/mzakharo/tubby/blob/main/model_orp.h5): model for predicting ORP from FC/PH. This one can be used to calibrate your ORP sensor by getting your water lab tested
-
-Basic [script](https://github.com/mzakharo/tubby/blob/main/predict.py) to load and run these models. usage:
+Basic [script](https://github.com/mzakharo/tubby/blob/main/predict.py) to load and run the model. usage:
 
 ```bash
-python3 ./predict.py  model_fc.h5 666 7.6
--> output:  0.83490694
-./predict.py model_orp.h5 7.6 0.85
--> output:  667.04565
+python3 predict.py  model_fc.h5 ORP_VALUE PH_VALUE
 ```
 
