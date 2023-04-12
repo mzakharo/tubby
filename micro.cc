@@ -4,7 +4,7 @@
 #include "micropython/tfmicro/model_fc.h"
 #include <stdio.h>
 
-const int tensor_arena_size = 3200;
+const int tensor_arena_size = 5000;
 uint8_t tensor_arena[tensor_arena_size];
 
 int main() {
@@ -31,8 +31,8 @@ int main() {
     printf("input mismatch\n");
     return 1;
   }
-  model_input->data.f[0] = 666.0;
-  model_input->data.f[1] = 7.6;
+  model_input->data.f[0] = 640.0;
+  model_input->data.f[1] = 7.76;
 
   TfLiteStatus invoke_status = interpreter.Invoke();
   if (invoke_status != kTfLiteOk) {
