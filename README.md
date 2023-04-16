@@ -1,13 +1,14 @@
 # Hot Tub Water Quality Sensor
 
 - Battery powered ORP, pH sensor for Hot Tub/SPA
+- Free Chlorine/Total Bromine estimate from pH and ORP values
 - ~ 1 year battery life @ 2 samples per hour
 - Sensor externally mounted, probes placed under the skimmer cover
 - [Home Assistant](https://www.home-assistant.io/) Integration
 - pH ATC (Automatic Temperature Compensation) integrating with [Balboa](https://github.com/mzakharo/pybalboa) temperature sensor
-- Free Chlorine/Bromine estimate model from PH and ORP values
 
-![image](https://user-images.githubusercontent.com/567867/219641155-691258fb-7b6d-4ead-90d6-9f79a9f34092.png)
+
+<img src="https://github.com/mzakharo/tubby/blob/main/pictures/ha.png" width="800" height="400"> 
 
 <img src="https://github.com/mzakharo/tubby/blob/main/pictures/final.jpg" width="250" height="400">  <img src="https://github.com/mzakharo/tubby/blob/main/pictures/probes.jpg" width="250" height="400">  <img src="https://github.com/mzakharo/tubby/blob/main/pictures/cal.jpg" width="250" height="400">
 
@@ -32,7 +33,7 @@
 
 ## FC (Free Chlorine) ppm Model
 
-Predict Free Chlorine & Bromine ppm from pH and ORP sensors. 
+Predict Free Chlorine/Total Bromine ppm from pH and ORP sensors. 
 
 - Data source:  https://jenfitch.com/free-chlorine-orpmv-vs-ph-new/
 
@@ -46,5 +47,17 @@ Basic [script](https://github.com/mzakharo/tubby/blob/main/predict.py) to load a
 
 ```bash
 python3 predict.py  model_fc.h5 ORP_VALUE PH_VALUE
+```
+
+Convert tflite model to tflite-micro
+```
+make gen
+```
+
+Execute tflite-micro model on Native Hardware
+```
+make tflite
+make
+./a.out
 ```
 
