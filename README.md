@@ -2,10 +2,10 @@
 
 - Battery powered ORP, pH sensor for Hot Tub/SPA
 - Free Chlorine/Total Bromine estimate from pH and ORP values
-- ~ 1 year battery life @ 2 samples per hour
-- Sensor externally mounted, probes placed under the skimmer cover
+- ~ 1 year battery life @ 2 samples per hour without the Solar Panel
 - [Home Assistant](https://www.home-assistant.io/) Integration
-- pH ATC (Automatic Temperature Compensation) integrating with [Balboa](https://github.com/mzakharo/pybalboa) temperature sensor
+- pH ATC (Automatic Temperature Compensation)
+- `2024 update`: Added Solar Panel
 
 
 <img src="https://github.com/mzakharo/tubby/blob/main/pictures/ha.png" width="800" height="400"> 
@@ -19,6 +19,11 @@
  - Atlas Scientific Gravity Analog [ORP](https://atlas-scientific.com/kits/gravity-analog-orp-kit/) and [pH](https://atlas-scientific.com/kits/gravity-analog-ph-kit/) Kits
  - Enclosure: [DS-AT-0811-S](https://www.adafruit.com/product/3931)
  - [2x100 kΩ resistors](https://www.adafruit.com/product/2787) for battery monitoring (optional)
+### Optional Solar Panel Components
+ - [Adafruit Universal USB / DC / Solar Lithium Ion/Polymer charger - bq24074](https://www.adafruit.com/product/4755)
+ - [3.5mm / 1.1mm to 5.5mm / 2.1mm DC Jack Adapter](https://www.adafruit.com/product/4287)
+ - [Small 6V 1W Solar Panel](https://www.adafruit.com/product/3809)
+ - [JST-PH 2-pin Jumper Cable](https://www.adafruit.com/product/4714)
  
  ## Wiring
   - [Diagram](https://raw.githubusercontent.com/mzakharo/tubby/main/pictures/tubby_wiring.png)
