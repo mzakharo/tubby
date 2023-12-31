@@ -2,7 +2,6 @@
 
 - Battery powered ORP, pH sensor for Hot Tub/SPA
 - Free Chlorine/Total Bromine estimate from pH and ORP values
-- ~ 1 year battery life @ 2 samples per hour without the Solar Panel
 - [Home Assistant](https://www.home-assistant.io/) Integration
 - pH ATC (Automatic Temperature Compensation)
 - `2024 update`: Added Solar Panel
