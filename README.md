@@ -14,7 +14,7 @@
 ## Hardware
   
  - [UM FeatherS2](https://unexpectedmaker.com/shop/feathers2-esp32-s2) ESP32 board from [here](https://www.adafruit.com/product/4769) 
- - 3500 mAh battery or [2500 mAh](https://www.adafruit.com/product/328)
+ - [2500 mAh](https://www.adafruit.com/product/328)
  - Atlas Scientific Gravity Analog [ORP](https://atlas-scientific.com/kits/gravity-analog-orp-kit/) and [pH](https://atlas-scientific.com/kits/gravity-analog-ph-kit/) Kits
  - Enclosure: [DS-AT-0811-S](https://www.adafruit.com/product/3931)
  - [2x100 kΩ resistors](https://www.adafruit.com/product/2787) for battery monitoring (optional)
