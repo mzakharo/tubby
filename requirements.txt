@@ -1,0 +1,6 @@
+tensorflow==2.15.0
+seaborn
+livelossplot
+pandas
+matplotlib
+lmfit
