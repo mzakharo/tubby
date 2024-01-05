@@ -45,7 +45,7 @@ Predict Free Chlorine/Total Bromine ppm from pH and ORP sensors.
 Build the model: [fc_model.ipynb](https://github.com/mzakharo/tubby/blob/main/fc_model.ipynb).
 
 Prebuilt model:
-- [model_fc.h5](https://github.com/mzakharo/tubby/blob/main/model_fc.h5): model for predicting FC from  ORP/pH
+- [model_fc.keras](https://github.com/mzakharo/tubby/blob/main/model_fc.keras): model for predicting FC from  ORP/pH
 
 Basic [script](https://github.com/mzakharo/tubby/blob/main/predict.py) to load and run the model. usage:
 
