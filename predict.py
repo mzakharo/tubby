@@ -7,8 +7,6 @@ import sys
 fmodel = sys.argv[1]
 p0 = float(sys.argv[2])
 p1 = float(sys.argv[3])
-model = keras.models.load_model(fmodel, compile=False)
-model.layers[-1].invert = True #Bug in Keras https://github.com/keras-team/keras/issues/17556
-
+model = keras.models.load_model(fmodel)
 v = model.predict([(p0, p1)], verbose=0)[0][0]
 print('output: ', v)
