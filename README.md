@@ -50,7 +50,7 @@ Prebuilt model:
 Basic [script](https://github.com/mzakharo/tubby/blob/main/predict.py) to load and run the model. usage:
 
 ```bash
-python3 predict.py  model_fc.h5 ORP_VALUE PH_VALUE
+python3 predict.py  model_fc.keras ORP_VALUE PH_VALUE
 ```
 
 Convert tflite model to tflite-micro
