@@ -59,6 +59,11 @@ make gen
 ```
 
 Execute tflite-micro model on Native Hardware
+
+``
+sudo apt install g++ unzip 
+pip3 install pillow
+``
 ```
 make tflite
 make
