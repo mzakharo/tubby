@@ -31,8 +31,8 @@ int main() {
     printf("input mismatch\n");
     return 1;
   }
-  model_input->data.f[0] = 640.0;
-  model_input->data.f[1] = 7.76;
+  model_input->data.f[0] = 700.0;
+  model_input->data.f[1] = 7.5;
 
   TfLiteStatus invoke_status = interpreter.Invoke();
   if (invoke_status != kTfLiteOk) {
