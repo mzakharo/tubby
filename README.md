@@ -54,6 +54,9 @@ Basic [script](https://github.com/mzakharo/tubby/blob/main/predict.py) to load a
 python3 predict.py  model_fc.h5 ORP_VALUE PH_VALUE
 ```
 
+
+## TF-Lite Micro (for micropython)
+
 Convert tflite model to tflite-micro
 ```
 make gen
@@ -61,10 +64,12 @@ make gen
 
 Execute tflite-micro model on Native Hardware
 
-``
-sudo apt install g++ unzip 
+```
+sudo apt install g++ unzip
+
 pip3 install pillow
-``
+
+```
 ```
 make tflite
 make
