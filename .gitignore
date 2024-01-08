@@ -1,3 +1,5 @@
 /a.out
 /checkpoint*.*
 /.ipynb_checkpoints/
+/dataset.csv
+*.asv
