@@ -40,6 +40,7 @@
 Predict Free Chlorine/Total Bromine ppm from pH and ORP sensors. 
 
 - Data source:  https://jenfitch.com/free-chlorine-orpmv-vs-ph-new/
+- Table Ideal values:  1.0 - 1.5 ppm
 
 
 Build the model: [fc_model.ipynb](https://github.com/mzakharo/tubby/blob/main/fc_model.ipynb).
