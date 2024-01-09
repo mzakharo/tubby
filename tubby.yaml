@@ -11,7 +11,8 @@ packages:
 # Sensor settling time with light sleep to save power
 custom_component:
 - lambda: |-
-    auto me  = new LightSleep();
+    auto me  = new LightSleep(3000000); //3 seconds
+    //auto me  = new LightSleep(900000000); //15 minutes
     return {me};
   components:
   - id: light_sleep_id
@@ -62,40 +63,49 @@ sensor:
   - platform: adc
     pin: 1
     name: "ORP"
+    force_update: true
     update_interval: 0.1s
     unit_of_measurement: "mV"
     attenuation: 11db
+    device_class: "voltage"
+    accuracy_decimals: 0
     id: "orp"
     filters:
         - median:
-            window_size: 21
-            send_every: 21
-            send_first_at: 21
+            window_size: 19
+            send_every: 19
+            send_first_at: 19
         - lambda: |
                 auto ORP_CAL_OFFSET = 21;
                 return (x * 1000 - 1500) + ORP_CAL_OFFSET;
   
   - platform: adc
     pin: 3
-    name: "pH_mV"
+    name: "pH Raw"
+    entity_category: "diagnostic"
+    device_class: "voltage"
+    force_update: true
     update_interval: 0.1s
     attenuation: 11db
     unit_of_measurement: "mV"
-    id: "ph_mv"
+    id: "ph_raw"
+    accuracy_decimals: 0
     filters:
         - median:
-            window_size: 21
-            send_every: 21
-            send_first_at: 21
+            window_size: 19
+            send_every: 19
+            send_first_at: 19
         - lambda: return x * 1000;     
   
   - platform: adc
     pin: 7
     name: "Battery"
-    icon: 'mdi:battery'
-    accuracy_decimals: 2
+    device_class: "battery"
+    entity_category: "diagnostic"
+    force_update: true
     update_interval: 2s
     unit_of_measurement: "%"
+    accuracy_decimals: 0
     attenuation: 11db       
     filters:    
         - calibrate_linear:
@@ -108,12 +118,14 @@ sensor:
   
   - platform: template
     name: pH
+    force_update: true
+    device_class: "ph"
     lambda: |
         auto PH_MID_CAL = 1533;
         auto PH_LOW_CAL = 2031;
         auto PH_HIGH_CAL = 1042;
-        if (id(ph_mv).state > PH_MID_CAL) return 7.0 - 3.0 / (PH_LOW_CAL - PH_MID_CAL) *  (id(ph_mv).state - PH_MID_CAL);
-        else                        return 7.0 - 3.0 / (PH_MID_CAL - PH_HIGH_CAL) * (id(ph_mv).state - PH_MID_CAL);
+        if (id(ph_raw).state > PH_MID_CAL) return 7.0 - 3.0 / (PH_LOW_CAL - PH_MID_CAL) *  (id(ph_raw).state - PH_MID_CAL);
+        else                        return 7.0 - 3.0 / (PH_MID_CAL - PH_HIGH_CAL) * (id(ph_raw).state - PH_MID_CAL);
     unit_of_measurement: pH
     icon: "mdi:ph"
     id: "ph"
@@ -122,6 +134,7 @@ sensor:
 
   - platform: template
     name: Total Bromine
+    force_update: true
     lambda: |
       auto x = id(orp).state;
       auto y = id(ph).state;
@@ -153,4 +166,5 @@ sensor:
 
 deep_sleep:
   id: deep_sleep_1
-  sleep_duration: 15min
+  #sleep_duration: 15min
+  sleep_duration: 10s
