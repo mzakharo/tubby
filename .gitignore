@@ -3,3 +3,5 @@
 /.ipynb_checkpoints/
 /dataset.csv
 *.asv
+/wifi.yaml
+/.esphome

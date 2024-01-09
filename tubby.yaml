@@ -1,0 +1,169 @@
+esphome:
+  name: tubby
+  name_add_mac_suffix: true
+  libraries:
+  includes:
+    - light_sleep.h 
+
+packages:
+  wifi: !include wifi.yaml
+  
+ 
+# Sensor settling time with light sleep to save power
+custom_component:
+- lambda: |-
+    auto me  = new LightSleep();
+    return {me};
+  components:
+  - id: light_sleep_id
+  
+  
+esp32:
+  board: um_feathers2
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+    level: INFO
+
+# Enable Home Assistant API
+binary_sensor:
+  - platform: homeassistant
+    name: "OTA state from Home Assistant"
+    entity_id: input_boolean.ota
+    publish_initial_state: true
+    id: ota_1
+    on_state:
+        - if:
+              condition:
+                lambda: 'return !x;'
+              then:
+                - delay: 3s # allow sensors to report state              
+                - deep_sleep.enter:
+                   id: deep_sleep_1
+        
+    
+    
+api:
+  password: ""
+  # on_client_connected:
+    # - delay: 4s #if we dont wait here, binary_sensor will not get an updated state
+    # - if:
+          # condition:
+            # binary_sensor.is_off: ota_1
+          # then:      
+            # - deep_sleep.enter:
+               # id: deep_sleep_1
+    # - logger.log: "Waiting for OTA"
+
+
+button:
+  - platform: restart
+    name: "Restart"
+    id: esphomerestart
+
+ota:
+  password: ""
+  
+
+preferences:
+  flash_write_interval: 1000min
+
+sensor:
+  - platform: adc
+    pin: 1
+    name: "ORP"
+    update_interval: 0.1s
+    unit_of_measurement: "mV"
+    attenuation: 11db
+    id: "orp"
+    filters:
+        - median:
+            window_size: 21
+            send_every: 21
+            send_first_at: 21
+        - lambda: |
+                auto ORP_CAL_OFFSET = 21;
+                return (x * 1000 - 1500) + ORP_CAL_OFFSET;
+  
+  - platform: adc
+    pin: 3
+    name: "pH_mV"
+    update_interval: 0.1s
+    attenuation: 11db
+    unit_of_measurement: "mV"
+    id: "ph_mv"
+    filters:
+        - median:
+            window_size: 21
+            send_every: 21
+            send_first_at: 21
+        - lambda: return x * 1000;
+      
+  
+  - platform: adc
+    pin: 7
+    name: "Battery"
+    icon: 'mdi:battery'
+    accuracy_decimals: 2
+    update_interval: 22s
+    unit_of_measurement: "%"
+    attenuation: 11db       
+    filters:    
+        - calibrate_linear:
+            - 1.5 ->  0
+            - 2.1 -> 100  
+        - lambda: |
+            if (x < 0) return 0;
+            else if (x > 100) return 100;
+            else return (x);         
+  
+  - platform: template
+    name: pH
+    lambda: |
+        auto PH_MID_CAL = 1533;
+        auto PH_LOW_CAL = 2031;
+        auto PH_HIGH_CAL = 1042;
+        if (id(ph_mv).state > PH_MID_CAL) return 7.0 - 3.0 / (PH_LOW_CAL - PH_MID_CAL) *  (id(ph_mv).state - PH_MID_CAL);
+        else                        return 7.0 - 3.0 / (PH_MID_CAL - PH_HIGH_CAL) * (id(ph_mv).state - PH_MID_CAL);
+    unit_of_measurement: pH
+    icon: "mdi:ph"
+    id: "ph"
+    update_interval: 2s    
+    accuracy_decimals: 2
+
+  - platform: template
+    name: Total Bromine
+    lambda: |
+      auto x = id(orp).state;
+      auto y = id(ph).state;
+      auto xm = 768.6067415730337;
+      auto xs = 97.75096854550462;
+      auto ym = 7.251203852327446;
+      auto ys = 0.460735810759621;
+      x = (x - xm) / xs;
+      y = (y - ym) / ys;
+      auto p00 =  1.692038740410026;    
+      auto p10 =  1.346668856458132;   
+      auto p01 =  0.411894450004881;    
+      auto p20 =  0.543701463012560;   
+      auto p11 =  0.445986985137331;   
+      auto p02 =  0.087408287395104; 
+      auto p30 =  0.129545323180402;    
+      auto p21 =  0.194585373805381;    
+      auto p12 =  0.082725684204779;  
+      auto p40 =  0.013825395134957;   
+      auto p31 =  0.031610487461203; 
+      auto p22 =  0.019475608702437;   
+      auto ppm = p00 + p10*x + p01*y + p20*pow(x,2) + p11*x*y + p02*pow(y,2) + p30*pow(x,3) + p21*pow(x,2)*y + p12*x*pow(y,2) + p40*pow(x,4) + p31*pow(x,3)*y + p22*pow(x,2)*pow(y,2);
+      return ppm * 3.0; // table chlorine ideal range 1-1.5 mapping to 3-4.5 for bromine
+      
+    unit_of_measurement: ppm
+    icon: "mdi:chemical-weapon"
+    update_interval: 2s
+    accuracy_decimals: 2
+
+deep_sleep:
+  id: deep_sleep_1
+  sleep_duration: 15min

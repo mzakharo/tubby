@@ -4,7 +4,7 @@ X = M(:,1);
 Y = M(:, 2);
 Z = M(:, 3);
 fitresult = createFit(X,Y, Z)
-
+format long
 coef = coeffnames(fitresult);
 for k=1:length(coef)
    %curstate=coef{k}
@@ -12,8 +12,20 @@ for k=1:length(coef)
    eval(exp)  ;  
 end
 
+xm = mean(X)
+xs = std(X)
+
+ym = mean(Y)
+ys = std(Y)
+
+
 fitresult( 700, 7.3)
-ppm_model(700,  7.3, fitresult)
+
+names = coeffnames(fitresult)
+vals = coeffvalues(fitresult)
+ppm_model(700,  7.3, xm, xs, ym, ys)
+
+ppm_model(660, 6.7, xm, xs, ym, ys)
 
 % maxi = max(M',[],2);
 % mini = min(M',[],2);
