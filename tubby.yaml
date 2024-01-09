@@ -22,7 +22,7 @@ ota:
 preferences:
   flash_write_interval: 1000min  
 
-# Sensor settling time with light sleep to save power
+# Sensor settling time from Power On
 custom_component:
 - lambda: |-
     //auto me  = new LightSleep(3000000); //3 seconds
@@ -33,8 +33,8 @@ custom_component:
 
 deep_sleep:
   id: deep_sleep_1
-  sleep_duration: 15min
-  #sleep_duration: 1min
+  #sleep_duration: 15min
+  sleep_duration: 2s
 
   
 
@@ -50,7 +50,7 @@ binary_sensor:
               condition:
                 lambda: 'return !x;'
               then:
-                - delay: 3s # allow sensors to report state TODO: figure out how to get rid of this delay             
+                - delay: 2s # allow sensors to report state          
                 - deep_sleep.enter:
                    id: deep_sleep_1
         
