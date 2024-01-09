@@ -5,7 +5,7 @@
 - [Home Assistant](https://www.home-assistant.io/) Integration
 - [Firmware](https://github.com/mzakharo/tubby/blob/main/tubby.yaml) is written using [esphome](https://esphome.io/index.html)
 
-<img src="https://github.com/mzakharo/tubby/blob/main/pictures/esphome.png" width="250" height="400"><img src="https://github.com/mzakharo/tubby/blob/main/pictures/final.jpg" width="250" height="400"> 
+<img src="https://github.com/mzakharo/tubby/blob/main/pictures/esphome.png" width="205" height="400"><img src="https://github.com/mzakharo/tubby/blob/main/pictures/final.jpg" width="250" height="400"> 
 
 ## Hardware  
  - [UM FeatherS2](https://unexpectedmaker.com/shop/feathers2-esp32-s2) ESP32 board from [here](https://www.adafruit.com/product/4769) 
