@@ -29,6 +29,7 @@
   - Connect the board via USB and enter `esphome run tubby.yaml`
   - In Home Assistant, create a helper switch named `ota`. When this switch is enabled, device will not sleep between measurements and can be updated.
   - Once your esphome device is added to Home Assistant, calibrate it with reference solutions `PH_MID_CAL` (pH 7), `PH_LOW_CAL` (pH 4), `PH_HIGH_CAL` (pH 10), `ORP_CAL_OFFSET` (ORP 225) in `tubby.yaml`
+  - Sanitizer Sensor in `tubby.yaml` outputs ppm values multipled by 3 for Bromine. Remove this multiplication factor for Chlorine. 
   - Reflash your calibrated settings again with `esphome run tubby.yaml`
   - Attach the unit to the Hot Tub, place the probes in the water, and enjoy!
 
