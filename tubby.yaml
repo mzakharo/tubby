@@ -19,8 +19,6 @@ api:
   password: ""  
 ota:
   password: ""
-preferences:
-  flash_write_interval: 1000min  
 
 # Sensor settling time from Power On
 custom_component:
@@ -33,7 +31,6 @@ custom_component:
 
 deep_sleep:
   id: deep_sleep_1
-  #sleep_duration: 15min
   sleep_duration: 2s
 
   
@@ -58,7 +55,48 @@ button:
   - platform: restart
     name: "Restart"
     id: esphomerestart
-
+    
+number:
+  - platform: template
+    entity_category: "diagnostic"  
+    name: "ORP Cal"
+    min_value: 0
+    max_value: 3300
+    step: 1
+    optimistic: true
+    initial_value: 21
+    restore_value: true
+    id: "orp_offset"
+  - platform: template
+    entity_category: "diagnostic"  
+    name: "pH 4 Cal"
+    min_value: 0
+    max_value: 3300
+    step: 1
+    optimistic: true
+    initial_value: 1906
+    restore_value: true
+    id: "ph_4"
+  - platform: template
+    entity_category: "diagnostic"  
+    name: "pH 7 Cal"
+    min_value: 0
+    max_value: 3300
+    step: 1
+    optimistic: true
+    initial_value: 1385
+    restore_value: true
+    id: "ph_7"
+  - platform: template
+    entity_category: "diagnostic"  
+    name: "pH 10 Cal"
+    min_value: 0
+    max_value: 3300
+    step: 1
+    optimistic: true
+    initial_value: 910
+    restore_value: true
+    id: "ph_10"
 
 sensor:
   - platform: adc
@@ -78,8 +116,7 @@ sensor:
             send_every: 19
             send_first_at: 19
         - lambda: |
-                auto ORP_CAL_OFFSET = 21;
-                return (x * 1000 - 1500) + ORP_CAL_OFFSET;
+                return (x * 1000 - 1500) + id(orp_offset).state;
   
   - platform: adc
     pin: 3
@@ -123,9 +160,9 @@ sensor:
     force_update: true
     device_class: "ph"
     lambda: |
-        auto PH_MID_CAL = 1385;
-        auto PH_LOW_CAL = 1906;
-        auto PH_HIGH_CAL = 910; 
+        auto PH_MID_CAL = id(ph_7).state;
+        auto PH_LOW_CAL = id(ph_4).state;
+        auto PH_HIGH_CAL = id(ph_10).state; 
         if (id(ph_raw).state > PH_MID_CAL) return 7.0 - 3.0 / (PH_LOW_CAL - PH_MID_CAL) *  (id(ph_raw).state - PH_MID_CAL);
         else                        return 7.0 - 3.0 / (PH_MID_CAL - PH_HIGH_CAL) * (id(ph_raw).state - PH_MID_CAL);
     unit_of_measurement: pH
