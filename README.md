@@ -5,7 +5,7 @@
 - [Home Assistant](https://www.home-assistant.io/) Integration
 - [Firmware](https://github.com/mzakharo/tubby/blob/main/tubby.yaml) is written using [esphome](https://esphome.io/index.html)
 
-<img src="https://github.com/mzakharo/tubby/blob/main/pictures/esphome.png" width="250" height="400"><img src="https://github.com/mzakharo/tubby/blob/main/pictures/final.jpg" width="250" height="400"> 
+<img src="https://github.com/mzakharo/tubby/blob/main/pictures/esphome.png" width="205" height="400"><img src="https://github.com/mzakharo/tubby/blob/main/pictures/final.jpg" width="250" height="400"> 
 
 ## Hardware  
  - [UM FeatherS2](https://unexpectedmaker.com/shop/feathers2-esp32-s2) ESP32 board from [here](https://www.adafruit.com/product/4769) 
@@ -26,10 +26,9 @@
   - Install [esphome](https://esphome.io/guides/installing_esphome)
   - copy `wifi_example.yaml` to `wifi.yaml` and edit the new file
   - Connect the board via USB and enter `esphome run tubby.yaml`
-  - In Home Assistant, create a helper switch `input_boolean.ota`. Enabling this switch will prevent device sleep.
-  - Once your esphome device is added to Home Assistant, calibrate it with reference solutions `PH_MID_CAL` (pH 7), `PH_LOW_CAL` (pH 4), `PH_HIGH_CAL` (pH 10), `ORP_CAL_OFFSET` (ORP 225) in `tubby.yaml`
-
-  - Reflash your calibrated settings again with `esphome run tubby.yaml`
+  - In Home Assistant, create a helper switch `input_boolean.ota`. Enable this switch, it will prevent device sleep.
+  - Once your esphome device is added to Home Assistant, Use Device's page, Diagnostics section to calibrate the probes
+  - Turn off `input_boolean.ota` to allow the device to save some power.
   - Attach the unit to the Hot Tub, place the probes in the water, and enjoy!
 
 ## Sanitizer ppm Model
