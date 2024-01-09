@@ -5,37 +5,38 @@ esphome:
   includes:
     - light_sleep.h 
 
-packages:
-  wifi: !include wifi.yaml
-  
-# Sensor settling time with light sleep to save power
-custom_component:
-- lambda: |-
-    auto me  = new LightSleep(3000000); //3 seconds
-    //auto me  = new LightSleep(900000000); //15 minutes
-    return {me};
-  components:
-  - id: light_sleep_id
-  
-  
 esp32:
   board: um_feathers2
   framework:
-    type: arduino
+    type: arduino   
 
+packages:
+  wifi: !include wifi.yaml
 # Enable logging
 logger:
     level: INFO
-
 api:
-  password: ""
-  
+  password: ""  
 ota:
   password: ""
-  
-
 preferences:
-  flash_write_interval: 1000min    
+  flash_write_interval: 1000min  
+
+# Sensor settling time with light sleep to save power
+custom_component:
+- lambda: |-
+    //auto me  = new LightSleep(3000000); //3 seconds
+    auto me  = new LightSleep(900000000); //15 minutes
+    return {me};
+  components:
+  - id: light_sleep_id  
+
+deep_sleep:
+  id: deep_sleep_1
+  sleep_duration: 15min
+  #sleep_duration: 1min
+
+  
 
 # Enable Home Assistant API
 binary_sensor:
@@ -64,12 +65,13 @@ sensor:
     pin: 1
     name: "ORP"
     force_update: true
-    update_interval: 0.1s
-    unit_of_measurement: "mV"
-    attenuation: 11db
+    update_interval: 0.1s  
+    entity_category: "diagnostic"
     device_class: "voltage"
-    accuracy_decimals: 0
+    attenuation: 11db    
+    unit_of_measurement: "mV"    
     id: "orp"
+    accuracy_decimals: 0
     filters:
         - median:
             window_size: 19
@@ -81,11 +83,11 @@ sensor:
   
   - platform: adc
     pin: 3
-    name: "pH Raw"
-    entity_category: "diagnostic"
-    device_class: "voltage"
+    name: "pH Raw"    
     force_update: true
     update_interval: 0.1s
+    entity_category: "diagnostic"
+    device_class: "voltage"
     attenuation: 11db
     unit_of_measurement: "mV"
     id: "ph_raw"
@@ -121,9 +123,9 @@ sensor:
     force_update: true
     device_class: "ph"
     lambda: |
-        auto PH_MID_CAL = 1533;
-        auto PH_LOW_CAL = 2031;
-        auto PH_HIGH_CAL = 1042;
+        auto PH_MID_CAL = 1385;
+        auto PH_LOW_CAL = 1906;
+        auto PH_HIGH_CAL = 910; 
         if (id(ph_raw).state > PH_MID_CAL) return 7.0 - 3.0 / (PH_LOW_CAL - PH_MID_CAL) *  (id(ph_raw).state - PH_MID_CAL);
         else                        return 7.0 - 3.0 / (PH_MID_CAL - PH_HIGH_CAL) * (id(ph_raw).state - PH_MID_CAL);
     unit_of_measurement: pH
@@ -133,7 +135,8 @@ sensor:
     accuracy_decimals: 2
 
   - platform: template
-    name: Total Bromine
+    name: Sanitizer
+    id: "ppm"
     force_update: true
     lambda: |
       auto x = id(orp).state;
@@ -160,11 +163,7 @@ sensor:
       return ppm * 3.0; // table chlorine ideal range 1-1.5 mapping to 3-4.5 for bromine
       
     unit_of_measurement: ppm
-    icon: "mdi:chemical-weapon"
+    icon: "mdi:test-tube"
     update_interval: 2s
     accuracy_decimals: 2
 
-deep_sleep:
-  id: deep_sleep_1
-  #sleep_duration: 15min
-  sleep_duration: 10s
