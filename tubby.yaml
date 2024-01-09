@@ -8,7 +8,6 @@ esphome:
 packages:
   wifi: !include wifi.yaml
   
- 
 # Sensor settling time with light sleep to save power
 custom_component:
 - lambda: |-
@@ -27,6 +26,16 @@ esp32:
 logger:
     level: INFO
 
+api:
+  password: ""
+  
+ota:
+  password: ""
+  
+
+preferences:
+  flash_write_interval: 1000min    
+
 # Enable Home Assistant API
 binary_sensor:
   - platform: homeassistant
@@ -39,36 +48,15 @@ binary_sensor:
               condition:
                 lambda: 'return !x;'
               then:
-                - delay: 3s # allow sensors to report state              
+                - delay: 3s # allow sensors to report state TODO: figure out how to get rid of this delay             
                 - deep_sleep.enter:
                    id: deep_sleep_1
         
-    
-    
-api:
-  password: ""
-  # on_client_connected:
-    # - delay: 4s #if we dont wait here, binary_sensor will not get an updated state
-    # - if:
-          # condition:
-            # binary_sensor.is_off: ota_1
-          # then:      
-            # - deep_sleep.enter:
-               # id: deep_sleep_1
-    # - logger.log: "Waiting for OTA"
-
-
 button:
   - platform: restart
     name: "Restart"
     id: esphomerestart
 
-ota:
-  password: ""
-  
-
-preferences:
-  flash_write_interval: 1000min
 
 sensor:
   - platform: adc
@@ -99,15 +87,14 @@ sensor:
             window_size: 21
             send_every: 21
             send_first_at: 21
-        - lambda: return x * 1000;
-      
+        - lambda: return x * 1000;     
   
   - platform: adc
     pin: 7
     name: "Battery"
     icon: 'mdi:battery'
     accuracy_decimals: 2
-    update_interval: 22s
+    update_interval: 2s
     unit_of_measurement: "%"
     attenuation: 11db       
     filters:    
