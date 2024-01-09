@@ -37,7 +37,7 @@
 
 - Data source:  https://jenfitch.com/free-chlorine-orpmv-vs-ph-new/
 - Table Ideal values:  1.0 - 1.5 ppm
-- Note: Sanitizer Sensor in `tubby.yaml` outputs ppm values multipled by 3. 
+- Note: Sanitizer Sensor in `tubby.yaml` outputs ppm values multipled by 3 for Bromine. 
 - [Notebook](https://github.com/mzakharo/tubby/blob/main/fc_model.ipynb).
 
 
