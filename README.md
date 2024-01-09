@@ -30,7 +30,7 @@
   - In Home Assistant, create a helper switch named `ota`. When this switch is enabled, device will not sleep between measurements and can be updated.
   - Once your esphome device is added to Home Assistant, calibrate it with reference solutions `PH_MID_CAL` (pH 7), `PH_LOW_CAL` (pH 4), `PH_HIGH_CAL` (pH 10), `ORP_CAL_OFFSET` (ORP 225) in `tubby.yaml`
   - Reflash your calibrated settings again with `esphome run tubby.yaml`
-  - Install and enjoy!
+  - Attach the unit to the Hot Tub, place the probes in the water, and enjoy!
 
 ## Sanitizer ppm Model
 
