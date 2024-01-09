@@ -24,7 +24,7 @@
   - [Diagram](https://raw.githubusercontent.com/mzakharo/tubby/main/pictures/tubby_wiring.png)
  
 ## [Firmware](https://github.com/mzakharo/tubby/blob/main/tubby.yaml)
-  - Install [esphome](https://esphome.io/guides/getting_started_command_line.html)
+  - Install [esphome](https://esphome.io/guides/installing_esphome)
   - copy `wifi_example.yaml` to `wifi.yaml` and edit the new file
   - Connect the board via USB and enter `esphome run tubby.yaml`
   - In Home Assistant, create a helper switch named `ota`. When this switch is enabled, device will not sleep between measurements and can be updated.
