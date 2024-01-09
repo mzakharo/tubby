@@ -27,7 +27,7 @@
   - Install [esphome](https://esphome.io/guides/installing_esphome)
   - copy `wifi_example.yaml` to `wifi.yaml` and edit the new file
   - Connect the board via USB and enter `esphome run tubby.yaml`
-  - In Home Assistant, create a helper switch named `ota`. When this switch is enabled, device will not sleep between measurements and can be updated.
+  - In Home Assistant, create a helper switch `input_boolean.ota`. Enabling this switch will prevent device sleep.
   - Once your esphome device is added to Home Assistant, calibrate it with reference solutions `PH_MID_CAL` (pH 7), `PH_LOW_CAL` (pH 4), `PH_HIGH_CAL` (pH 10), `ORP_CAL_OFFSET` (ORP 225) in `tubby.yaml`
 
   - Reflash your calibrated settings again with `esphome run tubby.yaml`
