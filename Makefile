@@ -6,5 +6,5 @@ tflite:
 	cd tflite-micro && make -f tensorflow/lite/micro/tools/make/Makefile -j4
 
 gen:
-	xxd -i model_fc.tflite > micropython/tfmicro/model_fc.h
+	xxd -i model_fc.tflite > model_fc.h
 	

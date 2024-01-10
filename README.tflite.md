@@ -1,6 +1,6 @@
 
 
-## TF-Lite Micro (for micropython)
+## TF-Lite Micro
 
 Convert tflite model to tflite-micro
 ```

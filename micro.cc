@@ -1,10 +1,10 @@
 #include "tensorflow/lite/micro/all_ops_resolver.h"
 #include "tensorflow/lite/micro/micro_interpreter.h"
 #include "tensorflow/lite/schema/schema_generated.h"
-#include "micropython/tfmicro/model_fc.h"
+#include "model_fc.h"
 #include <stdio.h>
 
-const int tensor_arena_size = 5000;
+const int tensor_arena_size = 8000;
 uint8_t tensor_arena[tensor_arena_size];
 
 int main() {
@@ -32,7 +32,7 @@ int main() {
     return 1;
   }
   model_input->data.f[0] = 700.0;
-  model_input->data.f[1] = 7.5;
+  model_input->data.f[1] = 7.3;
 
   TfLiteStatus invoke_status = interpreter.Invoke();
   if (invoke_status != kTfLiteOk) {
