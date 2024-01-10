@@ -27,16 +27,19 @@
   - copy `wifi_example.yaml` to `wifi.yaml` and edit the new file
   - Connect the board via USB and enter `esphome run tubby.yaml`
   - In Home Assistant, create a helper switch `input_boolean.ota`. Enable this switch, it will prevent device sleep.
-  - Once your esphome device is added to Home Assistant, Use Device's page, Diagnostics section to calibrate the probes
+  - Once your esphome device is added to Home Assistant, Use Device's page, Diagnostics section to calibrate the probes:
+     - `ORP Cal` : mV ORP calibration offset from raw ADC value. Note: ORP mV Sensor value has calibration applied
+     - `pH 10 Cal`: mV reading from `pH Raw` sensor while submerged in pH 10 calibration solution
+     - `pH 7 Cal`: mV reading from `pH Raw` sensor while submerged in pH 7 calibration solution
+     - `pH 4 Cal`: mV reading from `pH Raw` sensor while submerged in pH 4 calibration solution
+     - `ppm Factor`: 1 - Chlorine, 3 - Bromine
   - Turn off `input_boolean.ota` to allow the device to save some power.
   - Attach the unit to the Hot Tub, place the probes in the water, and enjoy!
 
 ## Sanitizer ppm Model
 
-- Data source:  https://jenfitch.com/free-chlorine-orpmv-vs-ph-new/
-- Table Ideal values:  1.0 - 1.5 ppm
-- Note: Sanitizer Sensor in `tubby.yaml` outputs ppm values multipled by 3 for Bromine. 
-- [Notebook](https://github.com/mzakharo/tubby/blob/main/fc_model.ipynb).
+- pH + ORP -> Chlorine ppm [Conversion Table](https://github.com/mzakharo/tubby/blob/main/charts/servovendi.png)
+- [Machine Learning Notebook](https://github.com/mzakharo/tubby/blob/main/fc_model.ipynb)
 - Generate .h file from .tflite: `xxd -i model_fc.tflite > model_fc.h`
 
 
