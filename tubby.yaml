@@ -98,6 +98,16 @@ number:
     initial_value: 910
     restore_value: true
     id: "ph_10"
+  - platform: template
+    entity_category: "diagnostic"  
+    name: "ppm Factor"
+    min_value: 1
+    max_value: 3
+    step: 0.01
+    optimistic: true
+    initial_value: 1
+    restore_value: true
+    id: "ppm_factor"
 
 sensor:
   - platform: adc
@@ -178,7 +188,7 @@ sensor:
     force_update: true
     lambda: |
       auto ppm = static_cast <LightSleep *> (id(custom_id))->predict_ppm(id(orp).state, id(ph).state);
-      return ppm * 3.0; // table chlorine ideal range 1-1.5 mapping to 3-4.5 for bromine
+      return ppm * id(ppm_factor).state;
       
     unit_of_measurement: ppm
     icon: "mdi:test-tube"
