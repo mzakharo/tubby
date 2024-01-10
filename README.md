@@ -33,7 +33,7 @@
 
 ## Sanitizer ppm Model
 
-- pH + ORP -> Chlorine ppm [Conversion Table](https://github.com/mzakharo/tubby/blob/main/charts/servovendi.png)- 
+- pH + ORP -> Chlorine ppm [Conversion Table](https://github.com/mzakharo/tubby/blob/main/charts/servovendi.png)
 - [Machine Learning Notebook](https://github.com/mzakharo/tubby/blob/main/fc_model.ipynb)
 - Generate .h file from .tflite: `xxd -i model_fc.tflite > model_fc.h`
 
