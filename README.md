@@ -2,7 +2,7 @@
 
 - Solar powered
 - ORP & pH Sensors
-- Calculates Sanitizer ppm
+- Estimates Sanitizer ppm
 - [Home Assistant](https://www.home-assistant.io/) Integration
 - [Firmware](https://github.com/mzakharo/tubby/blob/main/tubby.yaml) is written using [esphome](https://esphome.io/index.html)
 
