@@ -33,7 +33,7 @@
 
 ## Sanitizer ppm Model
 
-- ph + ORP -> Chlorine PPM [table](https://github.com/mzakharo/tubby/blob/main/charts/servovendi.png)
+- ph + ORP -> Chlorine ppm [table](https://github.com/mzakharo/tubby/blob/main/charts/servovendi.png)
 - Note: Sanitizer Sensor in `tubby.yaml` outputs ppm values multipled by 3 for Bromine
 - [Notebook](https://github.com/mzakharo/tubby/blob/main/fc_model.ipynb)
 - Generate .h file from .tflite: `xxd -i model_fc.tflite > model_fc.h`
