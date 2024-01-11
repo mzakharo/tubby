@@ -4,7 +4,7 @@
 - ORP & pH Sensors
 - Estimates Sanitizer ppm
 - [Home Assistant](https://www.home-assistant.io/) Integration
-- [Firmware](https://github.com/mzakharo/tubby/blob/main/tubby.yaml) is written using [esphome](https://esphome.io/index.html)
+- [Firmware](https://github.com/mzakharo/tubby/blob/main/tubby.yaml) is using [esphome](https://esphome.io/index.html)
 
 <img src="https://github.com/mzakharo/tubby/blob/main/pictures/esphome.png" width="150" height="400"><img src="https://github.com/mzakharo/tubby/blob/main/pictures/final.jpg" width="250" height="400"> 
 
