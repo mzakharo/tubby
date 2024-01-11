@@ -6,9 +6,9 @@ esphome:
   includes:
     - light_sleep.h
   on_shutdown:
-    priority: 0
+    priority: -200
     then:
-      - delay: 1s
+      - delay: 5s
 globals:
    - id: sleep_blocked
      type: bool

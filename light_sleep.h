@@ -14,85 +14,88 @@
 const int tensor_arena_size = 8000;
 uint8_t tensor_arena[tensor_arena_size];
 
-
-class LightSleep : public PollingComponent, public Sensor {
- public:
- int duration;
- tflite::MicroInterpreter * interpreter;
- TfLiteTensor* model_input;
+class LightSleep : public PollingComponent, public Sensor
+{
+public:
+  int duration;
+  tflite::MicroInterpreter *interpreter;
+  TfLiteTensor *model_input;
   // constructor
-  LightSleep(int dur) : PollingComponent(15000) {
-	 duration = dur; 
-	  
+  LightSleep(int dur) : PollingComponent(15000)
+  {
+    duration = dur;
   }
 
   float get_setup_priority() const override { return esphome::setup_priority::HARDWARE; }
 
-  void setup() override {
+  void setup() override
+  {
     // This will be called by App.setup()
 
-    const tflite::Model* model = tflite::GetModel(model_fc_tflite);
-    if (model->version() != TFLITE_SCHEMA_VERSION) {
-          printf("Model provided is schema version %d not equal "
-          "to supported version %d.\n",
-          model->version(), TFLITE_SCHEMA_VERSION);
+    const tflite::Model *model = tflite::GetModel(model_fc_tflite);
+    if (model->version() != TFLITE_SCHEMA_VERSION)
+    {
+      printf("Model provided is schema version %d not equal "
+             "to supported version %d.\n",
+             model->version(), TFLITE_SCHEMA_VERSION);
     }
     tflite::AllOpsResolver resolver;
-    tflite::ErrorReporter  *reporter = new MicroErrorReporter();
+    tflite::ErrorReporter *reporter = new MicroErrorReporter();
     interpreter = new tflite::MicroInterpreter(model, resolver, tensor_arena,
-                                        tensor_arena_size, reporter, nullptr, nullptr);
+                                               tensor_arena_size, reporter, nullptr, nullptr);
     TfLiteStatus allocate_status = interpreter->AllocateTensors();
-    if (allocate_status != kTfLiteOk) {
-      while(1) {
+    if (allocate_status != kTfLiteOk)
+    {
+      while (1)
+      {
         printf("unable to allocate tensors\n");
       }
     }
     model_input = interpreter->input(0);
-    if (model_input == nullptr) {
-         while(1) {
-          printf("unable to allocate input\n");
-         }
+    if (model_input == nullptr)
+    {
+      while (1)
+      {
+        printf("unable to allocate input\n");
+      }
     }
-    if (model_input->dims->size != 2 || model_input->type != kTfLiteFloat32) {
-      while(1) {
+    if (model_input->dims->size != 2 || model_input->type != kTfLiteFloat32)
+    {
+      while (1)
+      {
         printf("input mismatch\n");
       }
     }
 
-	  //pinMode(LDO2, OUTPUT);
-	  //digitalWrite(LDO2, HIGH);
+    // power on sensors
     gpio_set_direction(LDO2, GPIO_MODE_OUTPUT);
     gpio_set_level(LDO2, 1);
 
-	  //settle sensors
-	  esp_sleep_enable_timer_wakeup(duration);	
-	  esp_light_sleep_start();
-	
+    // settle sensors
+    esp_sleep_enable_timer_wakeup(duration);
+    esp_light_sleep_start();
 
-  	//pinMode(LED_BUILTIN, OUTPUT);
-	  //digitalWrite(LED_BUILTIN, HIGH);
+    // UI
     gpio_set_direction(LED_BUILTIN, GPIO_MODE_OUTPUT);
-    gpio_set_level(LED_BUILTIN, 1);	
-
-    
-	  //digitalWrite(LED_BUILTIN, LOW);
-	  //gpio_set_level(LED_BUILTIN, 0);
-	
+    gpio_set_level(LED_BUILTIN, 1);
   }
-  float predict_ppm(float orp, float ph) {
+  float predict_ppm(float orp, float ph)
+  {
     model_input->data.f[0] = orp;
     model_input->data.f[1] = ph;
 
     TfLiteStatus invoke_status = interpreter->Invoke();
-    if (invoke_status != kTfLiteOk) {
-        printf("Invoke error: status %d\n", invoke_status);
-        return -1.0;
+    if (invoke_status != kTfLiteOk)
+    {
+      printf("Invoke error: status %d\n", invoke_status);
+      return -1.0;
     }
-    TfLiteTensor* output = interpreter->output(0);
+    TfLiteTensor *output = interpreter->output(0);
     return output->data.f[0];
   }
 
-  void update() override {
-    // This will be called every "update_interval" milliseconds.	
+  void update() override
+  {
+    // This will be called every "update_interval" milliseconds.
   }
 };
