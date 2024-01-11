@@ -192,7 +192,6 @@ sensor:
         auto PH_HIGH_CAL = id(ph_10).state; 
         if (id(ph_raw).state > PH_MID_CAL) return 7.0 - 3.0 / (PH_LOW_CAL - PH_MID_CAL) *  (id(ph_raw).state - PH_MID_CAL);
         else                        return 7.0 - 3.0 / (PH_MID_CAL - PH_HIGH_CAL) * (id(ph_raw).state - PH_MID_CAL);
-    unit_of_measurement: pH
     icon: "mdi:ph"
     id: "ph"
     update_interval: 2s    
