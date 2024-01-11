@@ -4,7 +4,7 @@ esphome:
   libraries:
     - tflm_esp32
   includes:
-    - light_sleep.h 
+    - light_sleep.h
 
 esp32:
   board: um_feathers2
@@ -48,7 +48,7 @@ binary_sensor:
               condition:
                 lambda: 'return !x;'
               then:
-                - delay: 2s # allow sensors to report state          
+                - delay: 6s # allow sensors to report state          
                 - deep_sleep.enter:
                    id: deep_sleep_1
         
@@ -153,11 +153,15 @@ sensor:
     device_class: "battery"
     entity_category: "diagnostic"
     force_update: true
-    update_interval: 2s
+    update_interval: 0.1s
     unit_of_measurement: "%"
     accuracy_decimals: 0
     attenuation: 11db       
-    filters:    
+    filters:
+        - median:
+            window_size: 19
+            send_every: 19
+            send_first_at: 19 
         - calibrate_linear:
             - 1.5 ->  0
             - 2.1 -> 100  

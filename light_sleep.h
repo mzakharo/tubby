@@ -2,7 +2,7 @@
 #define LED_BUILTIN GPIO_NUM_13
 #define LDO2 GPIO_NUM_21
 
-#include "..\..\..\..\model_fc.h"
+#include "../../../../model_fc.h"
 
 #include <tflm_esp32.h>
 
@@ -57,25 +57,27 @@ class LightSleep : public PollingComponent, public Sensor {
       while(1) {
         printf("input mismatch\n");
       }
-    }
-    
-	//pinMode(LED_BUILTIN, OUTPUT);
-	//digitalWrite(LED_BUILTIN, HIGH);
-    gpio_set_direction(LED_BUILTIN, GPIO_MODE_OUTPUT);
-    gpio_set_level(LED_BUILTIN, 1);	
+    }    
+
 	
-	//pinMode(LDO2, OUTPUT);
-	//digitalWrite(LDO2, HIGH);
+	  //pinMode(LDO2, OUTPUT);
+	  //digitalWrite(LDO2, HIGH);
     gpio_set_direction(LDO2, GPIO_MODE_OUTPUT);
     gpio_set_level(LDO2, 1);
 
-	//settle sensors
-	esp_sleep_enable_timer_wakeup(duration);
+	  //settle sensors
+	  esp_sleep_enable_timer_wakeup(duration);	
+	  esp_light_sleep_start();
 	
-	esp_light_sleep_start();
-	
-	//digitalWrite(LED_BUILTIN, LOW);
-	gpio_set_level(LED_BUILTIN, 0);
+
+  	//pinMode(LED_BUILTIN, OUTPUT);
+	  //digitalWrite(LED_BUILTIN, HIGH);
+    gpio_set_direction(LED_BUILTIN, GPIO_MODE_OUTPUT);
+    gpio_set_level(LED_BUILTIN, 1);	
+
+    
+	  //digitalWrite(LED_BUILTIN, LOW);
+	  //gpio_set_level(LED_BUILTIN, 0);
 	
   }
   float predict_ppm(float orp, float ph) {
