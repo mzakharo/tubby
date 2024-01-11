@@ -1,10 +1,10 @@
-# Hot Tub & Pool Water Quality Sensor
+# Hot Tub/Spa & Pool Water Quality Sensor
 
 - Solar powered
 - ORP & pH Sensors
 - Estimates Sanitizer ppm
 - [Home Assistant](https://www.home-assistant.io/) Integration
-- [Firmware](https://github.com/mzakharo/tubby/blob/main/tubby.yaml) is written using [esphome](https://esphome.io/index.html)
+- [Firmware](https://github.com/mzakharo/tubby/blob/main/tubby.yaml) is using [esphome](https://esphome.io/index.html)
 
 <img src="https://github.com/mzakharo/tubby/blob/main/pictures/esphome.png" width="150" height="400"><img src="https://github.com/mzakharo/tubby/blob/main/pictures/final.jpg" width="250" height="400"> 
 
@@ -29,13 +29,13 @@
   - Connect the board via USB and enter `esphome run tubby.yaml`
   - In Home Assistant, create a helper switch `input_boolean.ota`. Enable this switch, it will prevent device sleep.
   - Once your esphome device is added to Home Assistant, Use Device's page, Diagnostics section to calibrate the probes:
-     - `ORP Cal` : mV ORP calibration offset from raw ADC value. Note: ORP mV Sensor value has calibration applied
+     - `ORP Cal` : mV ORP calibration offset from raw ADC value. Note: `ORP` mV Sensor value has calibration applied
      - `pH 10 Cal`: mV reading from `pH Raw` sensor while submerged in pH 10 calibration solution
      - `pH 7 Cal`: mV reading from `pH Raw` sensor while submerged in pH 7 calibration solution
      - `pH 4 Cal`: mV reading from `pH Raw` sensor while submerged in pH 4 calibration solution
      - `ppm Factor`: 1 - Chlorine, 3 - Bromine
   - Turn off `input_boolean.ota` to allow the device to save some power.
-  - Attach the unit to the Hot Tub, place the probes in the water, and enjoy!
+  - Place the probes in the water, and enjoy!
 
 ## Sanitizer ppm Model
 
