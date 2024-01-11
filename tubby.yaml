@@ -5,12 +5,20 @@ esphome:
     - tflm_esp32
   includes:
     - light_sleep.h
+  on_boot:
+    - priority: 100
+      then:
+        - output.turn_on: led  
 globals:
    - id: sleep_blocked
      type: bool
      restore_value: no
      initial_value: 'true'
 
+output:
+  - platform: gpio
+    pin: 13
+    id: led
 
 esp32:
   board: um_feathers2

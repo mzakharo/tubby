@@ -1,5 +1,5 @@
 #include "esphome.h"
-#define LED_BUILTIN GPIO_NUM_13
+
 #define LDO2 GPIO_NUM_21
 
 #include "../../../../model_fc.h"
@@ -25,6 +25,7 @@ public:
   {
     duration = dur;
   }
+  void on_shutdown() override { delay(2000); } //delay to allow mDNS and API Server to cleanly shutdown on poor WiFi Connections
 
   float get_setup_priority() const override { return esphome::setup_priority::HARDWARE; }
 
@@ -75,9 +76,6 @@ public:
     esp_sleep_enable_timer_wakeup(duration);
     esp_light_sleep_start();
 
-    // UI
-    gpio_set_direction(LED_BUILTIN, GPIO_MODE_OUTPUT);
-    gpio_set_level(LED_BUILTIN, 1);
   }
   float predict_ppm(float orp, float ph)
   {
