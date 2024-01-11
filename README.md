@@ -1,7 +1,8 @@
-# Hot Tub Water Quality Sensor
+# Hot Tub & Pool Water Quality Sensor
 
-- Solar powered ORP, pH sensor for Hot Tub/Pool
-- Sanitizer ppm model estimate from pH and ORP values
+- Solar powered
+- ORP & pH Sensors
+- Estimates Sanitizer ppm
 - [Home Assistant](https://www.home-assistant.io/) Integration
 - [Firmware](https://github.com/mzakharo/tubby/blob/main/tubby.yaml) is written using [esphome](https://esphome.io/index.html)
 
