@@ -6,6 +6,13 @@ esphome:
   includes:
     - light_sleep.h
 
+globals:
+   - id: sleep_blocked
+     type: bool
+     restore_value: no
+     initial_value: 'true'
+
+
 esp32:
   board: um_feathers2
   framework:
@@ -34,8 +41,6 @@ deep_sleep:
   id: deep_sleep_1
   sleep_duration: 2s
 
-  
-
 # Enable Home Assistant API
 binary_sensor:
   - platform: homeassistant
@@ -48,9 +53,9 @@ binary_sensor:
               condition:
                 lambda: 'return !x;'
               then:
-                - delay: 6s # allow sensors to report state          
-                - deep_sleep.enter:
-                   id: deep_sleep_1
+                  - globals.set:
+                      id: sleep_blocked
+                      value: 'false'
         
 button:
   - platform: restart
@@ -198,4 +203,10 @@ sensor:
     icon: "mdi:test-tube"
     update_interval: 2s
     accuracy_decimals: 2
+    on_value:
+         - if:
+            condition:
+              - lambda: "return id(sleep_blocked) == false;"
+            then:
+              - deep_sleep.enter: deep_sleep_1
 
