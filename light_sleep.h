@@ -59,13 +59,6 @@ class LightSleep : public PollingComponent, public Sensor {
       }
     }
 
-    //dummy ADC read reduces current consumption during light-sleep by 1mA
-    adc::ADCSensor *dummy =  new adc::ADCSensor();
-    dummy->set_output_raw(false);
-    dummy->set_attenuation(ADC_ATTEN_DB_11);
-    dummy->set_channel1(::ADC1_CHANNEL_1);
-    dummy->sample();
-	
 	  //pinMode(LDO2, OUTPUT);
 	  //digitalWrite(LDO2, HIGH);
     gpio_set_direction(LDO2, GPIO_MODE_OUTPUT);
