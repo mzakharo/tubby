@@ -5,3 +5,4 @@
 *.asv
 /wifi.yaml
 /.esphome
+/.vscode
