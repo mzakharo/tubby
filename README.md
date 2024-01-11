@@ -1,4 +1,4 @@
-# Hot Tub & Pool Water Quality Sensor
+# Hot Tub/Spa & Pool Water Quality Sensor
 
 - Solar powered
 - ORP & pH Sensors
@@ -35,7 +35,7 @@
      - `pH 4 Cal`: mV reading from `pH Raw` sensor while submerged in pH 4 calibration solution
      - `ppm Factor`: 1 - Chlorine, 3 - Bromine
   - Turn off `input_boolean.ota` to allow the device to save some power.
-  - Attach the unit to the Hot Tub, place the probes in the water, and enjoy!
+  - Place the probes in the water, and enjoy!
 
 ## Sanitizer ppm Model
 
