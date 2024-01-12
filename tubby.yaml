@@ -185,7 +185,6 @@ sensor:
   - platform: template
     name: pH
     force_update: true
-    device_class: "ph"
     lambda: |
         auto PH_MID_CAL = id(ph_7).state;
         auto PH_LOW_CAL = id(ph_4).state;
@@ -193,6 +192,7 @@ sensor:
         if (id(ph_raw).state > PH_MID_CAL) return 7.0 - 3.0 / (PH_LOW_CAL - PH_MID_CAL) *  (id(ph_raw).state - PH_MID_CAL);
         else                        return 7.0 - 3.0 / (PH_MID_CAL - PH_HIGH_CAL) * (id(ph_raw).state - PH_MID_CAL);
     icon: "mdi:ph"
+    unit_of_measurement: pH
     id: "ph"
     update_interval: 2s    
     accuracy_decimals: 2
@@ -204,7 +204,6 @@ sensor:
     lambda: |
       auto ppm = static_cast <LightSleep *> (id(custom_id))->predict_ppm(id(orp).state, id(ph).state);
       return ppm * id(ppm_factor).state;
-      
     unit_of_measurement: ppm
     icon: "mdi:test-tube"
     update_interval: 2s
