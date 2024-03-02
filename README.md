@@ -22,12 +22,14 @@
  
  ## Wiring
   - [Diagram](https://raw.githubusercontent.com/mzakharo/tubby/main/pictures/tubby_wiring.png)
+  - NOTE: You can skip the ambient sensor removal step
  
 ## [Firmware](https://github.com/mzakharo/tubby/blob/main/tubby.yaml)
   - Install [esphome](https://esphome.io/guides/installing_esphome) (Tested Version: 2023.12.5)
   - copy `wifi_example.yaml` to `wifi.yaml` and edit the new file
-  - Connect the board via USB and enter `esphome run tubby.yaml`
-  - In Home Assistant, create a helper switch `input_boolean.ota`. Enable this switch, it will prevent device sleep.
+  - Connect the board via USB and enter `esphome run tubby.yaml` on the command line. This will build and upload firmware to the board.
+  - In Home Assistant, create a helper switch `input_boolean.ota`. Enable this switch, it will prevent device `Deep` sleep.
+  - Power cycle the board, Device then enters `Light` sleep for `15 minutes` before it shows up in Home Assistant
   - Once your esphome device is added to Home Assistant, Use Device's page, Diagnostics section to calibrate the probes:
      - `ORP Cal` : mV ORP calibration offset from raw ADC value. Note: `ORP` mV Sensor value has calibration applied
      - `pH 10 Cal`: mV reading from `pH Raw` sensor while submerged in pH 10 calibration solution
