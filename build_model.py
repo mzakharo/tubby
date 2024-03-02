@@ -1,1 +1,0 @@
-moved to fc_model.ipynb
