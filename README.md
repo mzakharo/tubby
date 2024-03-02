@@ -24,7 +24,7 @@
   - [Diagram](https://raw.githubusercontent.com/mzakharo/tubby/main/pictures/tubby_wiring.png)
  
 ## [Firmware](https://github.com/mzakharo/tubby/blob/main/tubby.yaml)
-  - Install [esphome](https://esphome.io/guides/installing_esphome)
+  - Install [esphome](https://esphome.io/guides/installing_esphome) (Tested Version: 2023.12.5)
   - copy `wifi_example.yaml` to `wifi.yaml` and edit the new file
   - Connect the board via USB and enter `esphome run tubby.yaml`
   - In Home Assistant, create a helper switch `input_boolean.ota`. Enable this switch, it will prevent device sleep.
