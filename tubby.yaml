@@ -2,7 +2,7 @@ esphome:
   name: tubby
   name_add_mac_suffix: true
   libraries:
-    - tflm_esp32
+    - tflm_esp32=https://github.com/eloquentarduino/tflm_esp32.git#1.0.0
   includes:
     - light_sleep.h
   on_boot:
@@ -33,6 +33,7 @@ logger:
 api:
   password: ""  
 ota:
+  platform: esphome
   password: ""
 
 # Sensor settling time from Power On
@@ -129,7 +130,7 @@ sensor:
     update_interval: 0.1s  
     entity_category: "diagnostic"
     device_class: "voltage"
-    attenuation: 11db    
+    attenuation: 12db    
     unit_of_measurement: "mV"    
     id: "orp"
     accuracy_decimals: 0
@@ -148,7 +149,7 @@ sensor:
     update_interval: 0.1s
     entity_category: "diagnostic"
     device_class: "voltage"
-    attenuation: 11db
+    attenuation: 12db
     unit_of_measurement: "mV"
     id: "ph_raw"
     accuracy_decimals: 0
@@ -168,7 +169,7 @@ sensor:
     update_interval: 0.1s
     unit_of_measurement: "%"
     accuracy_decimals: 0
-    attenuation: 11db       
+    attenuation: 12db       
     filters:
         - median:
             window_size: 19

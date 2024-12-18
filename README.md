@@ -25,7 +25,7 @@
   - NOTE: You can skip the ambient sensor removal step
  
 ## [Firmware](https://github.com/mzakharo/tubby/blob/main/tubby.yaml)
-  - Install [esphome](https://esphome.io/guides/installing_esphome) (Tested Version: 2023.12.5)
+  - Install [esphome](https://esphome.io/guides/installing_esphome) (Tested Version:  2024.10.2)
   - copy `wifi_example.yaml` to `wifi.yaml` and edit the new file
   - Connect the board via USB and enter `esphome run tubby.yaml` on the command line. This will build and upload firmware to the board.
   - In Home Assistant, create a helper switch `input_boolean.ota`. Enable this switch, it will prevent device `Deep` sleep.
