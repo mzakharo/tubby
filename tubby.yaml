@@ -47,7 +47,7 @@ custom_component:
 
 deep_sleep:
   id: deep_sleep_1
-  sleep_duration: 15min
+  sleep_duration: 45min
 
 # Enable Home Assistant API
 binary_sensor:
