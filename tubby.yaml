@@ -39,15 +39,15 @@ ota:
 # Sensor settling time from Power On
 custom_component:
 - lambda: |-
-    //auto me  = new LightSleep(3000000); //3 seconds
-    auto me  = new LightSleep(900000000); //15 minutes
+    ///auto me  = new LightSleep(3000000); //3 seconds
+    auto me  = new LightSleep(420000000); //7 minutes
     return {me};
   components:
   - id: custom_id  
 
 deep_sleep:
   id: deep_sleep_1
-  sleep_duration: 45min
+  sleep_duration: 53min
 
 # Enable Home Assistant API
 binary_sensor:
