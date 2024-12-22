@@ -8,11 +8,16 @@
 
 <img src="https://github.com/mzakharo/tubby/blob/main/pictures/esphome.png" width="150" height="400"><img src="https://github.com/mzakharo/tubby/blob/main/pictures/final.jpg" width="250" height="400"> 
 
+## Log
+ - Update Dec 2024: Replaced worn-out ORP probe and added SMA Panel adapter. Decreased sampling rate to 1/hour to help battery last when there is little sunshine. 
+
+
 ## Hardware  
  - [UM FeatherS2](https://unexpectedmaker.com/shop/feathers2-esp32-s2) ESP32 board from [here](https://www.adafruit.com/product/4769) 
  - [2500 mAh](https://www.adafruit.com/product/328)
  - Atlas Scientific Gravity Analog [ORP](https://atlas-scientific.com/kits/gravity-analog-orp-kit/) and [pH](https://atlas-scientific.com/kits/gravity-analog-ph-kit/) Kits
  - Enclosure: [DS-AT-0811-S](https://www.adafruit.com/product/3931)
+ - Waterproof SMA Panel Adapter [SMA-ADP](https://atlas-scientific.com/connectors/sma-adapter/)
  - [2x100 kΩ resistors](https://www.adafruit.com/product/2787) for battery monitoring (optional)
 ### Solar Panel Components
  - [Adafruit Universal USB / DC / Solar Lithium Ion/Polymer charger - bq24074](https://www.adafruit.com/product/4755)
