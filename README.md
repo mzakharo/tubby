@@ -33,7 +33,7 @@
 ## [Firmware](https://github.com/mzakharo/tubby/blob/main/tubby.yaml)
   - Install [Python](https://www.python.org/downloads/) (Tested 3.13.3)
   - Open Command Prompt (cmd.exe on Windows)
-  - pip install esphome==2024.12.4
+  - `pip install esphome==2024.12.4`
   - copy `wifi_example.yaml` to `wifi.yaml` and edit the new file
   - Connect the board via USB and enter `esphome run tubby.yaml` on the command line. This will build and upload firmware to the board.
   - In Home Assistant, create a helper switch `input_boolean.ota`. Enable this switch, it will prevent device `Deep` sleep.
