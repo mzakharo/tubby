@@ -1,14 +1,15 @@
 # Hot Tub/Spa & Pool Water Quality Sensor
 
 - Solar powered
-- ORP & pH Sensors
-- Estimates Sanitizer ppm
+- ORP & pH (Optional) Sensors
+- Estimates Sanitizer ppm (Optional)
 - [Home Assistant](https://www.home-assistant.io/) Integration
 - [Firmware](https://github.com/mzakharo/tubby/blob/main/tubby.yaml) is using [esphome](https://esphome.io/index.html)
 
 <img src="https://github.com/mzakharo/tubby/blob/main/pictures/esphome.png" width="150" height="400"><img src="https://github.com/mzakharo/tubby/blob/main/pictures/final.jpg" width="250" height="400"> 
 
 ## Log
+ - Update May 2025: I removed pH probe (3rd broke in 2 years) in December and have been running on just ORP measurements (ORP probe has been much more reliable). Once ORP measurement goes outside the 'green' table range, perform manual pH & alkalinity measurement, balance, then balance ORP with sanitizer. I think pH probe is not worth the cost/hassle in replacement - convenience it adds is marginal, since you still need to measure alkalinity manually. 
  - Update Dec 2024: Replaced worn-out ORP probe and added SMA Panel adapter. Decreased sampling rate to 1/hour to help battery last when there is little sunshine. 
 
 
@@ -30,7 +31,9 @@
   - NOTE: You can skip the ambient sensor removal step
  
 ## [Firmware](https://github.com/mzakharo/tubby/blob/main/tubby.yaml)
-  - Install [esphome](https://esphome.io/guides/installing_esphome) (Tested Version:  2024.10.2)
+  - Install [Python](https://www.python.org/downloads/) (Tested 3.13.3)
+  - Open Command Prompt (cmd.exe on Windows)
+  - `pip install esphome==2024.12.4`
   - copy `wifi_example.yaml` to `wifi.yaml` and edit the new file
   - Connect the board via USB and enter `esphome run tubby.yaml` on the command line. This will build and upload firmware to the board.
   - In Home Assistant, create a helper switch `input_boolean.ota`. Enable this switch, it will prevent device `Deep` sleep.
