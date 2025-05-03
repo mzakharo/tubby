@@ -1,0 +1,130 @@
+esphome:
+  name: tubby
+  name_add_mac_suffix: true
+  on_boot:
+    - priority: 100
+      then:
+        - output.turn_on: led  
+globals:
+   - id: sleep_blocked
+     type: bool
+     restore_value: no
+     initial_value: 'true'
+
+output:
+  - platform: gpio
+    pin: 13
+    id: led
+
+esp32:
+  board: um_feathers2
+  framework:
+    type: arduino   
+
+packages:
+  wifi: !include wifi.yaml
+# Enable logging
+logger:
+    level: INFO
+api:
+  password: ""  
+ota:
+  platform: esphome
+  password: ""
+
+external_components:
+  - source: ./custom_components # Or the full path if needed
+    components: [ light_sleep_component ] # Name must match the component directory
+
+light_sleep_component:
+  id: custom_id      # Optional ID for the light sleep component
+  duration: 7min     # Sleep duration
+  ldo_pin: GPIO21    # Optional: Control GPIO21 (assumes HIGH=ON, LOW=OFF) 
+
+deep_sleep:
+  id: deep_sleep_1
+  sleep_duration: 53min
+
+# Enable Home Assistant API
+binary_sensor:
+  - platform: homeassistant
+    name: "OTA state from Home Assistant"
+    entity_id: input_boolean.ota
+    publish_initial_state: true
+    id: ota_1
+    on_state:
+        - if:
+              condition:
+                lambda: 'return !x;'
+              then:
+                  - globals.set:
+                      id: sleep_blocked
+                      value: 'false'
+        
+button:
+  - platform: restart
+    name: "Restart"
+    id: esphomerestart
+    
+number:
+  - platform: template
+    entity_category: "diagnostic"  
+    name: "ORP Cal"
+    min_value: 0
+    max_value: 3300
+    step: 1
+    optimistic: true
+    initial_value: 21
+    restore_value: true
+    id: "orp_offset"
+
+sensor:
+  - platform: adc
+    pin: 1
+    name: "ORP"
+    force_update: true
+    update_interval: 0.1s  
+    entity_category: "diagnostic"
+    device_class: "voltage"
+    attenuation: 12db    
+    unit_of_measurement: "mV"    
+    id: "orp"
+    accuracy_decimals: 0
+    filters:
+        - median:
+            window_size: 19
+            send_every: 19
+            send_first_at: 19
+        - lambda: |
+                return (x * 1000 - 1500) + id(orp_offset).state;    
+    on_value:
+         - if:
+            condition:
+              - lambda: "return id(sleep_blocked) == false;"
+            then:
+              - deep_sleep.enter: deep_sleep_1
+  
+
+  - platform: adc
+    pin: 7
+    name: "Battery"
+    device_class: "battery"
+    entity_category: "diagnostic"
+    force_update: true
+    update_interval: 0.1s
+    unit_of_measurement: "%"
+    accuracy_decimals: 0
+    attenuation: 12db       
+    filters:
+        - median:
+            window_size: 19
+            send_every: 19
+            send_first_at: 19 
+        - calibrate_linear:
+            - 1.5 ->  0
+            - 2.1 -> 100  
+        - lambda: |
+            if (x < 0) return 0;
+            else if (x > 100) return 100;
+            else return (x);         
+  

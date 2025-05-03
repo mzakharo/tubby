@@ -4,7 +4,7 @@ esphome:
   libraries:
     - tflm_esp32=https://github.com/eloquentarduino/tflm_esp32.git#1.0.0
   includes:
-    - light_sleep.h
+    - light_sleep_inline.h
   on_boot:
     - priority: 100
       then:
